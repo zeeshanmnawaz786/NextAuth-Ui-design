@@ -25,10 +25,10 @@ function Register() {
       },
       body: JSON.stringify(state),
     };
-    await fetch("http://localhost:3000/api/auth/signup", options)
+    await fetch("/api/auth/signup", options)
       .then((res) => res.json())
       .then((data) => {
-        if (data) router.push("http://localhost:3000/authentication/login");
+        if (data) router.push("/authentication/login");
       });
   };
   return (

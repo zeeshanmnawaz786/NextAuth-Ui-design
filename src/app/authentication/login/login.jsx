@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 function Login() {
   const handleGoogleSignIn = () => {
-    signIn("google", { callbackUrl: "http://localhost:3000/homepage" });
+    signIn("google", { callbackUrl: "/homepage" });
   };
 
   const [state, setState] = useState();
@@ -26,7 +26,7 @@ function Login() {
       redirect: false,
       email: state.email,
       password: state.password,
-      callbackUrl: "http://localhost:3000/homepage",
+      callbackUrl: "/homepage",
     });
     if (statusCredentils.ok) router.push(statusCredentils.url);
     console.log(
