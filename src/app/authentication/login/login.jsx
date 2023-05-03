@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Login() {
   const handleGoogleSignIn = () => {
@@ -9,6 +10,7 @@ function Login() {
   };
 
   const [state, setState] = useState();
+  const router = useRouter();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -18,10 +20,19 @@ function Login() {
     }));
   }
 
-  var submitFunc = (e) => {
+  var submitFunc = async (e) => {
     e.preventDefault();
-    console.log(state);
-    
+    const statusCredentils = await signIn("credentials", {
+      redirect: false,
+      email: state.email,
+      password: state.password,
+      callbackUrl: "http://localhost:3000/homepage",
+    });
+    if (statusCredentils.ok) router.push(statusCredentils.url);
+    console.log(
+      "🚀 ~ file: login.jsx:30 ~ submitFunc ~ statusCredentils:",
+      statusCredentils
+    );
   };
 
   return (

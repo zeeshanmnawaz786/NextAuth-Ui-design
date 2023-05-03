@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function Register() {
   const [state, setState] = useState();
+  const router = useRouter();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -13,9 +15,21 @@ function Register() {
     }));
   }
 
-  var submitFunc = (e) => {
+  var submitFunc = async (e) => {
     e.preventDefault();
     console.log(state);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(state),
+    };
+    await fetch("http://localhost:3000/api/auth/signup", options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) router.push("http://localhost:3000/authentication/login");
+      });
   };
   return (
     <div>
