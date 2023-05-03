@@ -1,9 +1,10 @@
-import { HomePage } from "./homepage/homePage";
+// import { HomePage } from "./homepage/homePage";
 
 export default function Home() {
   return (
     <>
-      <HomePage />
+    <div>Hello</div>
+      {/* <HomePage /> */}
     </>
   );
 }
