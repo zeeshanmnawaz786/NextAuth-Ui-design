@@ -24,15 +24,11 @@ function Login() {
     e.preventDefault();
     const statusCredentils = await signIn("credentials", {
       redirect: false,
-      email: state.email,
-      password: state.password,
+      email: state?.email,
+      password: state?.password,
       callbackUrl: "/homepage",
     });
     if (statusCredentils.ok) router.push(statusCredentils.url);
-    console.log(
-      "🚀 ~ file: login.jsx:30 ~ submitFunc ~ statusCredentils:",
-      statusCredentils
-    );
   };
 
   return (
